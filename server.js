@@ -2,8 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import { join, resolve } from "path";
-import devRouter from "./routes/dev.js";
-import studentRouter from "./routes/student.js";;
+import pageRouter from "./routes/page.js";
+import expressEJSLayout from "express-ejs-layouts";
+
 
 
 // config env
@@ -18,11 +19,15 @@ const app = express();
 // init support
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(expressEJSLayout);
 
+
+// set ejs support
+app.set("view engine", "ejs");
 
 // Routing
-app.use(devRouter);
-app.use(studentRouter);
+app.use(pageRouter);
+
 
 
 
